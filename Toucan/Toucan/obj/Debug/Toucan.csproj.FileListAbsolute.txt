@@ -1,0 +1,9 @@
+C:\Users\Александр\Programms\Toucan\Toucan\bin\Debug\Toucan.exe.config
+C:\Users\Александр\Programms\Toucan\Toucan\bin\Debug\Toucan.exe
+C:\Users\Александр\Programms\Toucan\Toucan\bin\Debug\Toucan.pdb
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.csprojResolveAssemblyReference.cache
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.Form1.resources
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.Properties.Resources.resources
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.csproj.GenerateResource.Cache
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.exe
+C:\Users\Александр\Programms\Toucan\Toucan\obj\Debug\Toucan.pdb
