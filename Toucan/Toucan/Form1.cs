@@ -14,7 +14,9 @@ namespace Toucan
     public partial class Form1 : Form
     {
         public static Bitmap _graph;
-        Graphics g;
+        Graphics gr;
+
+        public List<string> output;
 
         /* 
         на этот раз я буду все тупа пихать в класс формы 
@@ -51,7 +53,7 @@ namespace Toucan
             _graph = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.InitialDirectory = ".\\";
             openFileDialog1.Filter = "Bitmap files (*.bmp)|*.bmp|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 2; 
             openFileDialog1.RestoreDirectory = true;
@@ -62,6 +64,17 @@ namespace Toucan
                 try //"я взял защиту, дорогая..."
                 {
                     _graph = new Bitmap(openFileDialog1.FileName);
+                    btnMake.Enabled = true;
+
+                    gr = this.panel1.CreateGraphics();
+                    gr.DrawImage(_graph, 0, 0);
+
+                    /*
+                     * это очень круто,
+                     когда изображение не помещается на панель
+                     надо сделать крутой скроллинг, как супер крутых приложениях
+
+                    */
                 }
                 catch (Exception ex)
                 {
@@ -69,13 +82,7 @@ namespace Toucan
                 }
             }
 
-            g = this.panel1.CreateGraphics();
-            g.DrawImage(_graph, 0, 0); /* это очень круто,
-            когда изображение не помещается на панель
-
-            надо сделать крутой скроллинг, как супер крутых приложениях
-
-            */
+            
 
 
 
@@ -88,6 +95,93 @@ namespace Toucan
         private void Form1_Load(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnMake_Click(object sender, EventArgs e)
+        {
+            //перепилить это говно
+
+            output = new List<string>();
+
+
+            //параметры изображения
+            const int left = 73, right = 51, top = 10, bot = 70,
+                scaleWidth = 94, scaleHeight = 31,
+                imageWidth = 2000, imageHeight = 1200; // gfhfvtnhs bpj,hf;tybz
+            
+            //параметры масштаба графика 
+            const int stepDay = 20, stepHour = 3, stepDegree = 1;
+            const int depth = 150; 
+
+            //обрезаем ненужное
+            int naturalHeight = imageHeight - top - bot;
+            int naturalWidth = imageWidth - left - right;
+            _graph = CropImage(_graph, new Rectangle(left, top, naturalWidth , naturalHeight ));
+            gr.DrawImage(_graph, 0, 0);
+
+            //начинаем разделять
+            int countOfSteps = stepDay * stepHour;
+            for (int i = 0; i < countOfSteps; i++)
+            {
+                int currentWidth = naturalWidth * i / countOfSteps;
+
+                int cm = 255, xm = 0, ym = 0;
+
+                for (int j = 0; j < naturalHeight; j++)
+                {
+
+                    Color pix = _graph.GetPixel(currentWidth, j);
+
+                    //debugging
+                   
+                    
+
+
+                    if ((pix.R < cm) && IsEqual(pix.R, pix.G, pix.B))
+                    {
+                        cm = pix.R;
+                        xm = currentWidth;
+                        ym = j;
+                    }
+                   
+                }
+                output.Add(string.Format("{0};{1}", xm, ym));
+                SetVerticalLine(xm, ym, Color.Red);
+
+                gr.DrawImage(_graph, 0, 0);
+            }
+
+                
+            
+
+
+        }
+
+
+
+        public Bitmap CropImage(Bitmap source, Rectangle section)
+        {
+            // Метод обрезки изображения
+            Bitmap bmp = new Bitmap(section.Width, section.Height);
+
+            Graphics g = Graphics.FromImage(bmp);
+
+            
+            g.DrawImage(source, 0, 0, section, GraphicsUnit.Pixel);
+
+            return bmp;
+        }
+
+        public bool IsEqual(int a, int b, int c)
+        {
+            if ((a == b) && (b == c)) return true;
+            return false;
+        }
+
+        public static void SetVerticalLine(int x, int y, Color c)
+        {
+            for (int i = 0; i < y; i++)
+                _graph.SetPixel(x, i, c);
         }
     }
 }
