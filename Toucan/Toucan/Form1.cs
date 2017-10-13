@@ -72,7 +72,7 @@ namespace Toucan
                     /*
                      * это очень круто,
                      когда изображение не помещается на панель
-                     надо сделать крутой скроллинг, как супер крутых приложениях
+                     надо сделать крутой скроллинг, как в супер крутых приложениях
 
                     */
                 }
@@ -107,10 +107,10 @@ namespace Toucan
             //параметры изображения
             const int left = 73, right = 51, top = 10, bot = 70,
                 scaleWidth = 94, scaleHeight = 31,
-                imageWidth = 2000, imageHeight = 1200; // gfhfvtnhs bpj,hf;tybz
-            
+                imageWidth = 2000, imageHeight = 1200; 
+
             //параметры масштаба графика 
-            const int stepDay = 20, stepHour = 3, stepDegree = 1;
+            const int stepDay = 20, stepHour = 20, stepDegree = 1;
             const int depth = 150; 
 
             //обрезаем ненужное
@@ -133,13 +133,13 @@ namespace Toucan
                     Color pix = _graph.GetPixel(currentWidth, j);
 
                     //debugging
-                   
-                    
+
+                    int curr = (pix.R + pix.G + pix.B)/ 3;
 
 
-                    if ((pix.R < cm) && IsEqual(pix.R, pix.G, pix.B))
+                    if ( curr < cm )
                     {
-                        cm = pix.R;
+                        cm = curr;
                         xm = currentWidth;
                         ym = j;
                     }
@@ -151,8 +151,8 @@ namespace Toucan
                 gr.DrawImage(_graph, 0, 0);
             }
 
-                
-            
+
+           
 
 
         }
@@ -172,16 +172,21 @@ namespace Toucan
             return bmp;
         }
 
-        public bool IsEqual(int a, int b, int c)
-        {
-            if ((a == b) && (b == c)) return true;
-            return false;
-        }
+      
 
         public static void SetVerticalLine(int x, int y, Color c)
         {
             for (int i = 0; i < y; i++)
                 _graph.SetPixel(x, i, c);
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          //Katzen, здесь надо сделать сохранение битмапа через savefiledialog
+          //shneil, zoldat
+
+        }
+
+        
     }
 }

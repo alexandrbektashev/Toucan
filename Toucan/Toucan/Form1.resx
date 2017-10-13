@@ -154,4 +154,25 @@
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>
   </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>надо сделать:
+1. вывести те константы, как поля в класс формы
+2. придумать, как в форме их настраивать
+3. значения по умолчанию для них должны стоять те, что там присваюваются в коде
+4. надо написать код в кнопочки сэйв файла и экзит
+
+5. в обработке картинки есть массив, в который записываются координаты точек графика
+там они представлены как икс и игрек, надо конвертировать их в значения физических величин 
+
+6. добавить кнопочку "экспорт таблицы" в менюшку в левом верхнем меню
+
+7. надо сделать, чтобы обработка картинки была в фоновом процессе 
+и приложение не зависало в время обрботки
+
+8. добавить скроллбары
+9. что-нибудь еще что придет в голову</value>
+  </data>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>238, 17</value>
+  </metadata>
 </root>
